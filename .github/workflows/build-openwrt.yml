@@ -130,7 +130,6 @@ jobs:
         mkdir -p ./artifact/
         find openwrt/bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./artifact/
         find openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./artifact/
-        find openwrt/bin/targets/ -name "*combined*vmdk*" | xargs -i mv -f {} ./artifact/
         echo "::set-output name=status::success"
 
     - name: Upload firmware directory
