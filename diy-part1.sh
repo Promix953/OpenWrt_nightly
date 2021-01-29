@@ -13,3 +13,5 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+rm -rf /workdir/openwrt/package/lean/luci-app-jd-dailybonus
+(cd /workdir/openwrt/package/lean && git clone https://github.com/Promix953/luci-app-jd-dailybonus)
