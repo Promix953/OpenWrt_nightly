@@ -13,3 +13,6 @@
 
 rm -rf package/lean/luci-app-jd-dailybonus
 git clone https://github.com/Promix953/luci-app-jd-dailybonus -b develop package/lean/luci-app-jd-dailybonus
+
+echo 'CONFIG_EXTRA_FIRMWARE="i915/skl_dmc_ver1_27.bin"' >> target/linux/x86/config-5.4
+echo 'CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"' >> target/linux/x86/config-5.4
