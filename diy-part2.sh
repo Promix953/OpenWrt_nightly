@@ -11,6 +11,12 @@
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.123.1/g' package/base-files/files/bin/config_generate
 
+# Modify default theme
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+
+# Modify hostname
+#sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+
 #echo 'CONFIG_EXTRA_FIRMWARE="i915/skl_dmc_ver1_27.bin"' >> target/linux/x86/config-5.4
 #echo 'CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"' >> target/linux/x86/config-5.4
 #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
