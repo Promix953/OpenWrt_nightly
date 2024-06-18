@@ -23,11 +23,6 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 
 #Patch luci-app-mwan3
 sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_detail.htm
-sed -i '28 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_diagnostics.htm
+sed -i '27 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_diagnostics.htm
 sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_interface.htm
 sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_troubleshooting.htm
-
-cat feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_detail.htm
-cat feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_diagnostics.htm
-cat feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_interface.htm
-cat feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_troubleshooting.htm
