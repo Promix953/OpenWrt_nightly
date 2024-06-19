@@ -21,11 +21,5 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 #echo 'CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"' >> target/linux/x86/config-5.4
 #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
 
-#Patch luci-app-mwan3
-sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_detail.htm
-sed -i '27 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_diagnostics.htm
-sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_interface.htm
-sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_troubleshooting.htm
-
 #Add ddns-go
 git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
