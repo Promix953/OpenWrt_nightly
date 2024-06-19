@@ -26,3 +26,6 @@ sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>
 sed -i '27 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_diagnostics.htm
 sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_interface.htm
 sed -i '15 a <script type="text/javascript" src="<%=resource%>/cbi.js"></script>' feeds/luci/applications/luci-app-mwan3/luasrc/view/mwan/status_troubleshooting.htm
+
+#Add ddns-go
+git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
