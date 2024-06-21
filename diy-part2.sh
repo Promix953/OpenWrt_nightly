@@ -21,5 +21,13 @@
 #echo 'CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"' >> target/linux/x86/config-5.4
 #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
 
-#Add ddns-go
-git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
+# Add kernel build user
+sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
+    echo 'CONFIG_KERNEL_BUILD_USER="Promix953"' >>.config
+
+# Add kernel build domain
+sed -i '/CONFIG_KERNEL_BUILD_DOMAIN/d' .config &&
+    echo 'CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions"' >>.config
+
+# 添加 ddns-go
+git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/custom/ddns-go
