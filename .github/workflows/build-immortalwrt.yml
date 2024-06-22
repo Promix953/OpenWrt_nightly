@@ -78,7 +78,7 @@ jobs:
     - name: Cache
       uses: klever1988/cachewrtbuild@main
       with:
-        ccache: 'true'
+        ccache: 'false'
         mixkey: ${{ env.DEVICE_ARCH }}-immortalwrt
         prefix: ${{ github.workspace }}/openwrt
 

@@ -19,7 +19,7 @@
 
 #echo 'CONFIG_EXTRA_FIRMWARE="i915/skl_dmc_ver1_27.bin"' >> target/linux/x86/config-5.4
 #echo 'CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"' >> target/linux/x86/config-5.4
-echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
+#echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
 
 # Add kernel build user
 sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
