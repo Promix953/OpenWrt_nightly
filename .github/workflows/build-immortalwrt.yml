@@ -79,8 +79,8 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
-        mixkey: ${{ env.DEVICE_ARCH }}
-        prefix: ${{ github.workspace }}/immortalwrt
+        mixkey: ${{ env.DEVICE_ARCH }}-immortalwrt
+        prefix: ${{ github.workspace }}/openwrt
 
     - name: Load custom feeds
       run: |
