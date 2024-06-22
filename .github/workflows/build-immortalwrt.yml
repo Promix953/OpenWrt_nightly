@@ -10,19 +10,19 @@
 # See /LICENSE for more information.
 #
 
-name: LEDE Builder
+name: Immortalwrt Builder
 
 on:
   repository_dispatch:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/immortalwrt/immortalwrt
+  REPO_BRANCH: openwrt-23.05
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: lede.config
-  DIY_P1_SH: diy-part1-lede.sh
-  DIY_P2_SH: diy-part2-lede.sh
+  CONFIG_FILE: immortalwrt.config
+  DIY_P1_SH: diy-part1-immortalwrt.sh
+  DIY_P2_SH: diy-part2-immortalwrt.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
@@ -88,7 +88,7 @@ jobs:
       with:
         ccache: 'true'
         mixkey: ${{ env.DEVICE_ARCH }}
-        prefix: ${{ github.workspace }}/openwrt
+        prefix: ${{ github.workspace }}/immortalwrt
 
     - name: Load custom feeds
       run: |
@@ -139,7 +139,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: LEDE_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: Immortalwrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -163,14 +163,14 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: LEDE_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: Immortalwrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Generate release tag
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "release_tag=LEDE-$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
+        echo "release_tag=Immortalwrt-$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         [ ${UPLOAD_GOFILE} = true && ${{ steps.gofile.outputs.url }} ] && echo "🔗 [GoFile](${{ steps.gofile.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
