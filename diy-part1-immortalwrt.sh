@@ -14,6 +14,9 @@
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 
+# Comment a feed source
+sed -i '/telephony/s/^/#/' feeds.conf.default
+
 # 修改默认 IP
 sed -i 's/192.168.1.1/192.168.123.1/g' package/base-files/files/bin/config_generate
 
