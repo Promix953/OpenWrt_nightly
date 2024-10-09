@@ -60,9 +60,17 @@ jobs:
           sudo aptitude purge '~n ^mysql' -f -y >/dev/null 2>&1
           sudo aptitude purge '~n ^php' -f -y >/dev/null 2>&1
           sudo aptitude purge '~n ^dotnet' -f -y >/dev/null 2>&1
-          sudo apt-get autoremove -y >/dev/null 2>&1
+          sudo apt-get autoremove -y --purge >/dev/null 2>&1
           sudo apt-get autoclean -y >/dev/null 2>&1
           echo "some packages purged"
+          sudo systemctl stop snapd
+          sudo systemctl disable snapd
+          for snap in $(snap list | awk '{print $1}' | tail -n +2); do sudo snap remove --purge "$snap"; done
+          sudo apt-get remove --purge snapd
+          echo -e 'Package: snapd\nPin: release a=*\nPin-Priority: -10' | sudo tee /etc/apt/preferences.d/nosnap.pref
+          sudo rm -rf /var/cache/snapd/
+          sudo rm -rf ~/snap
+          echo "No snap!"
 
     - name: Checkout
       uses: actions/checkout@main
@@ -88,9 +96,6 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        apt-mark hold firefox
-        sudo -E apt-get -qq autoremove --purge
-        sudo -E apt-get -qq clean
         sudo bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /mnt/workdir
