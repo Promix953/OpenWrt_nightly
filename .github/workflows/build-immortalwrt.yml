@@ -63,14 +63,10 @@ jobs:
           sudo apt-get autoremove -y --purge >/dev/null 2>&1
           sudo apt-get autoclean -y >/dev/null 2>&1
           echo "some packages purged"
-          sudo systemctl stop snapd
-          sudo systemctl disable snapd
-          for snap in $(snap list | awk '{print $1}' | tail -n +2); do sudo snap remove --purge "$snap"; done
-          sudo apt-get remove --purge snapd
+          sudo snap list
+          sudo snap remove --purge firefox
           echo -e 'Package: snapd\nPin: release a=*\nPin-Priority: -10' | sudo tee /etc/apt/preferences.d/nosnap.pref
-          sudo rm -rf /var/cache/snapd/
-          sudo rm -rf ~/snap
-          echo "No snap!"
+          echo "some snap purged"
 
     - name: Checkout
       uses: actions/checkout@main
