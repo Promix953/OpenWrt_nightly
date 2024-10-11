@@ -60,13 +60,10 @@ jobs:
           sudo aptitude purge '~n ^mysql' -f -y >/dev/null 2>&1
           sudo aptitude purge '~n ^php' -f -y >/dev/null 2>&1
           sudo aptitude purge '~n ^dotnet' -f -y >/dev/null 2>&1
+          sudo apt-get purge -y firefox
           sudo apt-get autoremove -y --purge >/dev/null 2>&1
           sudo apt-get autoclean -y >/dev/null 2>&1
           echo "some packages purged"
-          sudo snap list
-          sudo snap remove --purge firefox
-          echo -e 'Package: snapd\nPin: release a=*\nPin-Priority: -10' | sudo tee /etc/apt/preferences.d/nosnap.pref
-          echo "some snap purged"
 
     - name: Checkout
       uses: actions/checkout@main
