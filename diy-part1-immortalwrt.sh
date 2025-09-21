@@ -15,6 +15,11 @@
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 sed -i '$a src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main' feeds.conf.default
 
+mkdir customfeed
+git clone https://github.com/yingziwu/openwrt-fakehttp.git ./customfeed/openwrt-fakehttp
+git clone https://github.com/yingziwu/luci-app-fakehttp.git ./customfeed/luci-app-fakehttp
+sed -i '$a src-link fakehttp ../customfeed' feeds.conf.default
+
 # Comment a feed source
 sed -i '/telephony/s/^/#/' feeds.conf.default
 
