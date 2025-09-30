@@ -16,10 +16,10 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
-        Cache:
-          description: 'Use Cache'
+        NoCache:
+          description: 'Clean Cache'
           required: true
-          default: 'true'
+          default: 'false'
           type: choice
           options:
           - 'true'
@@ -113,7 +113,7 @@ jobs:
       with:
         ccache: 'true'
         mixkey: ${{ env.DEVICE_ARCH }}-immortalwrt
-        clean: ${{github.event.inputs.Cache}}
+        clean: ${{github.event.inputs.NoCache}}
         prefix: ${{ github.workspace }}/openwrt
 
     - name: Load custom feeds
