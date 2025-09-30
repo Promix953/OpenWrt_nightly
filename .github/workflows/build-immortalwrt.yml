@@ -33,7 +33,7 @@ on:
           - 'true'
           - 'false'
   schedule:
-    - cron: '17 21 * * *'
+    - cron: '17 20 * * *'
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
