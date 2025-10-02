@@ -29,3 +29,5 @@ sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
 sed -i '/CONFIG_KERNEL_BUILD_DOMAIN/d' .config &&
     echo 'CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions"' >>.config
 
+git apply fix_iucode.patch
+    echo 'Apply intel-microcode patch'
