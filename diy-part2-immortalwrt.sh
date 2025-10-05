@@ -28,3 +28,6 @@ sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
 # Add kernel build domain
 sed -i '/CONFIG_KERNEL_BUILD_DOMAIN/d' .config &&
     echo 'CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions"' >>.config
+
+[ -e patches ] && echo 'Apply patches.' &&
+    git apply patches/*.patch || true
