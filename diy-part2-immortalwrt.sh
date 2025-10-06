@@ -21,6 +21,10 @@
 #echo 'CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"' >> target/linux/x86/config-5.4
 #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
 
+# Replace homeproxy
+rm -rf feeds/luci/applications/luci-app-homeproxy &&
+    git clone -b mwan https://github.com/Promix953/homeproxy_mwan.git feeds/luci/applications/luci-app-homeproxy
+
 # Add kernel build user
 sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
     echo 'CONFIG_KERNEL_BUILD_USER="Promix953"' >>.config
@@ -29,5 +33,6 @@ sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
 sed -i '/CONFIG_KERNEL_BUILD_DOMAIN/d' .config &&
     echo 'CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions"' >>.config
 
+# Apply patches
 [ -e patches ] && echo 'Apply patches.' &&
     git apply patches/*.patch || true
