@@ -19,19 +19,13 @@ on:
         NoCache:
           description: 'Clean Cache'
           required: true
-          default: 'false'
-          type: choice
-          options:
-          - 'true'
-          - 'false'
+          default: false
+          type: boolean
         FreeDisk:
           description: 'Free Disk Space'
           required: true
-          default: 'false'
-          type: choice
-          options:
-          - 'true'
-          - 'false'
+          default: false
+          type: boolean
   schedule:
     - cron: '17 20 * * *'
 
@@ -70,7 +64,7 @@ jobs:
 
     - name: Free Disk Space
       uses: xc2/free-disk-space@main
-      if: github.event.inputs.FreeDisk == 'true' && !cancelled()
+      if: inputs.FreeDisk && !cancelled()
       with:
         tool-cache: false
         android: true
@@ -113,7 +107,7 @@ jobs:
       with:
         ccache: 'false'
         mixkey: ${{ env.DEVICE_ARCH }}-immortalwrt
-        clean: ${{github.event.inputs.NoCache}}
+        clean: ${{inputs.NoCache}}
         prefix: ${{ github.workspace }}/openwrt
 
     - name: Load custom feeds
@@ -195,8 +189,6 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=Immortalwrt-$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
-        touch release.txt
-        [ ${UPLOAD_GOFILE} = true && ${{ steps.gofile.outputs.url }} ] && echo "🔗 [GoFile](${{ steps.gofile.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
