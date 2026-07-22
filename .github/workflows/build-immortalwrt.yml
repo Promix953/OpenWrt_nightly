@@ -64,7 +64,7 @@ jobs:
 
     - name: Free Disk Space
       uses: xc2/free-disk-space@main
-      if: inputs.FreeDisk && !cancelled()
+      if: ${{ inputs.FreeDisk == 'true' && !cancelled() }}
       with:
         tool-cache: false
         android: true
@@ -96,9 +96,9 @@ jobs:
     - name: Cache
       uses: klever1988/cachewrtbuild@main
       with:
-        ccache: 'false'
+        ccache: false
         mixkey: ${{ env.DEVICE_ARCH }}-immortalwrt
-        clean: ${{inputs.NoCache}}
+        clean: ${{ inputs.NoCache == 'true' }}
         prefix: ${{ github.workspace }}/openwrt
 
     - name: Load custom feeds
