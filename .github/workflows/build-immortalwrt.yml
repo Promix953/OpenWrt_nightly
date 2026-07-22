@@ -1,15 +1,3 @@
-#
-# https://github.com/P3TERX/Actions-OpenWrt
-#
-# File: .github/workflows/openwrt-bulder.yml
-# Description: Build OpenWrt using GitHub Actions
-#
-# Copyright (c) 2019-2024 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
-
 name: Immortalwrt Builder
 
 on:
@@ -63,7 +51,7 @@ jobs:
         df -Th
 
     - name: Free Disk Space
-      uses: xc2/free-disk-space@main
+      uses: insightsengineering/free-disk-space@v1
       if: ${{ inputs.FreeDisk == 'true' && !cancelled() }}
       with:
         tool-cache: false
@@ -183,14 +171,19 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
-      uses: softprops/action-gh-release@v2
-      if: steps.compile.outputs.status == 'success' && steps.tag.outputs.status == 'success' && !cancelled()  
+      if: steps.compile.outputs.status == 'success' && steps.tag.outputs.status == 'success' && !cancelled()
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
-        body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # 确保 release.txt 存在，否则创建默认说明
+        if [ ! -f release.txt ]; then
+          echo "Immortalwrt 固件自动构建" > release.txt
+        fi
+        # 创建 Release 并上传所有固件文件
+        gh release create "${{ steps.tag.outputs.release_tag }}" \
+          --title "Immortalwrt ${{ steps.tag.outputs.release_tag }}" \
+          --notes-file release.txt \
+          "${{ env.FIRMWARE }}"/*
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
