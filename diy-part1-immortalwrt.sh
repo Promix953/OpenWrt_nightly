@@ -13,7 +13,7 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-sed -i '$a src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main' feeds.conf.default
+# sed -i '$a src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main' feeds.conf.default
 
 # mkdir customfeed
 # git clone https://github.com/yingziwu/openwrt-fakehttp.git ./customfeed/openwrt-fakehttp
@@ -22,6 +22,7 @@ sed -i '$a src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;mai
 
 # Comment a feed source
 sed -i '/telephony/s/^/#/' feeds.conf.default
+sed -i '/video/s/^/#/' feeds.conf.default
 
 # 修改默认 IP
 sed -i 's/192.168.1.1/192.168.123.1/g' package/base-files/files/bin/config_generate
