@@ -22,8 +22,8 @@
 #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
 
 # Replace homeproxy
-rm -rf feeds/luci/applications/luci-app-homeproxy &&
-    git clone -b mwan https://github.com/Promix953/homeproxy_mwan.git feeds/luci/applications/luci-app-homeproxy
+# rm -rf feeds/luci/applications/luci-app-homeproxy &&
+#     git clone -b mwan https://github.com/Promix953/homeproxy_mwan.git feeds/luci/applications/luci-app-homeproxy
 
 # Add kernel build user
 sed -i '/CONFIG_KERNEL_BUILD_USER/d' .config &&
